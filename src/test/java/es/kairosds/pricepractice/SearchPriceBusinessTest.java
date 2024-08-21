@@ -6,8 +6,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.assertj.core.api.Assertions;
 import org.mockito.Mockito;
 
+import es.kairosds.pricepractice.application.exceptions.DateTimeParseException;
 import es.kairosds.pricepractice.application.exceptions.PriceNotFoundException;
 import es.kairosds.pricepractice.application.search_price.SearchPriceRequest;
 import es.kairosds.pricepractice.application.search_price.SearchPriceResponse;
@@ -24,6 +26,49 @@ class SearchPriceBusinessTest {
         private final PriceRepository priceRepository = Mockito.mock(PriceRepository.class);
         private final PriceService priceService = new PriceService(priceRepository);
         private final SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
+
+        private static final String DATE_FORMAT = "yyyy-MM-dd-HH.mm.ss";
+
+        @Test
+        void shouldReturnsLocalDateTime() {
+            String date = "2024-08-22-15.30.00";
+
+            LocalDateTime result = FormatUtil.dateParse(date);
+
+            assertEquals(2024, result.getYear());
+            assertEquals(8, result.getMonthValue());
+            assertEquals(22, result.getDayOfMonth());
+            assertEquals(15, result.getHour());
+            assertEquals(30, result.getMinute());
+            assertEquals( 0, result.getSecond() );
+        }
+
+        @Test
+        void shouldThrowsDateTimeParseException() {
+            String invalidDate = "2024-08-22 15:30:00"; // Incorrect format
+
+            Assertions.assertThatThrownBy(() -> FormatUtil.dateParse(invalidDate))
+                    .isInstanceOf(DateTimeParseException.class)
+                    .hasMessageContaining("Invalid date format: " + invalidDate);
+        }
+
+        @Test
+        void shouldReturnsFormattedDateToString() {
+            LocalDateTime date = LocalDateTime.of(2024, 8, 22, 15, 30, 0);
+
+            String result = FormatUtil.toFormat(date);
+
+            assertEquals("2024-08-22-15.30.00", result);
+        }
+
+        @Test
+        void shouldReturnsFormattedDoubleToString() {
+            Double num = 123.456789;
+
+            String result = FormatUtil.formatDouble(num);
+
+            assertEquals("123.46", result);
+        }
         
         @Test
         void shouldSearchPriceFirstCase() throws PriceNotFoundException {

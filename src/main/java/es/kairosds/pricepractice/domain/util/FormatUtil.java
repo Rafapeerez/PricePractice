@@ -3,6 +3,8 @@ package es.kairosds.pricepractice.domain.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import es.kairosds.pricepractice.application.exceptions.DateTimeParseException;
+
 public class FormatUtil {
     
     private FormatUtil() {}
@@ -10,7 +12,11 @@ public class FormatUtil {
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
 
     public static LocalDateTime dateParse(String date) {
-        return LocalDateTime.parse(date, dtf);
+        try {
+            return LocalDateTime.parse(date, dtf);
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DateTimeParseException("Invalid date format: " + date);
+        }
     }
 
     public static String toFormat(LocalDateTime date) {

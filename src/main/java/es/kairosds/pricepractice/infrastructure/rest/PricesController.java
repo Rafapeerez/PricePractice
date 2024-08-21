@@ -38,12 +38,6 @@ public class PricesController {
             throw new MissingDataException("Brand ID is missing or empty");
         }
 
-        try {
-            FormatUtil.dateParse(date);
-        } catch (Exception e) {
-            throw new BadRequestException("Invalid date format: " + date);
-        }
-
         SearchPriceRequest request = SearchPriceRequest.builder()
             .date(FormatUtil.dateParse(date))
             .productID(productId)
