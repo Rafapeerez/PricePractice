@@ -1,4 +1,4 @@
-package es.kairosds.pricepractice.application.mappers;
+package es.kairosds.pricepractice.infrastructure.mappers;
 
 import es.kairosds.pricepractice.domain.aggregates.Price;
 import es.kairosds.pricepractice.domain.vos.Amount;
