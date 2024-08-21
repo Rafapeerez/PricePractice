@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import es.kairosds.pricepractice.application.exceptions.PriceNotFoundException;
 import es.kairosds.pricepractice.application.search_price.SearchPriceRequest;
 import es.kairosds.pricepractice.application.search_price.SearchPriceResponse;
 import es.kairosds.pricepractice.application.search_price.SearchPriceUseCase;
 import es.kairosds.pricepractice.domain.aggregates.Price;
-import es.kairosds.pricepractice.domain.exception.PriceNotFoundException;
 import es.kairosds.pricepractice.domain.repositories.PriceRepository;
 import es.kairosds.pricepractice.domain.services.PriceService;
 import es.kairosds.pricepractice.domain.util.FormatUtil;

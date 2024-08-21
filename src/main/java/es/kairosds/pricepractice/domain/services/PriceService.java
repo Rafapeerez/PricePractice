@@ -3,8 +3,8 @@ package es.kairosds.pricepractice.domain.services;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
+import es.kairosds.pricepractice.application.exceptions.PriceNotFoundException;
 import es.kairosds.pricepractice.domain.aggregates.Price;
-import es.kairosds.pricepractice.domain.exception.PriceNotFoundException;
 import es.kairosds.pricepractice.domain.repositories.PriceRepository;
 
 public class PriceService {

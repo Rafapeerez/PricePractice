@@ -1,7 +1,7 @@
 package es.kairosds.pricepractice.application.search_price;
 
+import es.kairosds.pricepractice.application.exceptions.PriceNotFoundException;
 import es.kairosds.pricepractice.domain.aggregates.Price;
-import es.kairosds.pricepractice.domain.exception.PriceNotFoundException;
 import es.kairosds.pricepractice.domain.services.PriceService;
 import es.kairosds.pricepractice.domain.util.FormatUtil;
 
