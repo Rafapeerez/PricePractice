@@ -23,7 +23,7 @@ class SearchPriceIntegrationTest {
 
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
                 "/price/search?date=2020-06-14-10.00.00&productId=35455&brandId=1",SearchPriceResponse.class);
-
+        
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
 
@@ -42,8 +42,6 @@ class SearchPriceIntegrationTest {
 
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
                 "/price/search?date=2020-06-14-16.00.00&productId=35455&brandId=1", SearchPriceResponse.class);
-            
-        System.out.println(res);
 
         assertTrue(res.getStatusCode().is2xxSuccessful());
 
@@ -64,8 +62,6 @@ class SearchPriceIntegrationTest {
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
 
-        System.out.println(res);
-
         SearchPriceResponse response = res.getBody();
 
         assertEquals("35455", response.getProductID());
@@ -81,8 +77,7 @@ class SearchPriceIntegrationTest {
     
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
                 "/price/search?date=2020-06-15-10.00.00&productId=35455&brandId=1", SearchPriceResponse.class);
-        
-    
+
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
     

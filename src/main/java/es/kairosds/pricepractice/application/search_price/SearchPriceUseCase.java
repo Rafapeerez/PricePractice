@@ -14,7 +14,6 @@ public class SearchPriceUseCase {
     }
 
     public SearchPriceResponse execute(SearchPriceRequest request) throws PriceNotFoundException {
-        
         Price price = this.priceService.searchPrice(request.getDate(), request.getProductID(), request.getBrandID());
 
         return SearchPriceResponse.builder()

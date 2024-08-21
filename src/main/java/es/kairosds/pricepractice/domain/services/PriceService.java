@@ -2,8 +2,6 @@ package es.kairosds.pricepractice.domain.services;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
-import java.util.Optional;
-
 
 import es.kairosds.pricepractice.domain.aggregates.Price;
 import es.kairosds.pricepractice.domain.exception.PriceNotFoundException;
@@ -19,16 +17,7 @@ public class PriceService {
     
     public Price searchPrice(LocalDateTime date, String productID, String branchID) throws PriceNotFoundException {
         
-        Optional<Price> price = this.priceRepository.findAll().stream()
-            .filter(p -> p.getDateStart().isBefore(date) && p.getDateEnd().isAfter(date))
-            .filter(p -> p.getProductID().equals(productID))
-            .filter(p -> p.getBrandID().equals(branchID))
-        .max(Comparator.comparingInt(Price::getPriority));
-                
-        if (price.isPresent()) {
-            return price.get();
-        } else {
-            throw new PriceNotFoundException("Price not found.");
-        }
+        return this.priceRepository.findPricesByCriteria(date, productID, branchID).stream()
+        .max(Comparator.comparingInt(Price::getPriority)).orElseThrow(() -> new PriceNotFoundException("PriceNotFound"));
     }
 }
