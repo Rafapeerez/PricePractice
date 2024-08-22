@@ -121,9 +121,17 @@ class SearchPriceIntegrationTest {
     }
     
     @Test
-    void shouldAlertBadRequest() {
+    void shouldAlertMissingInfo() {
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
                 "/price/search?date=2020-06-16-21.00.00&productId=35455&brandId=", SearchPriceResponse.class);
+
+        assertTrue(res.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400)));
+    }
+    
+    @Test
+    void shouldAlertBadRequest() {
+        ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
+                "/price/search?date=2020-06-16-21.00.00&brandId=1", SearchPriceResponse.class);
         
         assertTrue(res.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400)));
     }
