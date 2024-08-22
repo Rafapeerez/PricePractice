@@ -27,8 +27,6 @@ class SearchPriceBusinessTest {
         private final PriceService priceService = new PriceService(priceRepository);
         private final SearchPriceUseCase searchPriceUseCase = new SearchPriceUseCase(priceService);
 
-        private static final String DATE_FORMAT = "yyyy-MM-dd-HH.mm.ss";
-
         @Test
         void shouldReturnsLocalDateTime() {
             String date = "2024-08-22-15.30.00";
@@ -67,7 +65,7 @@ class SearchPriceBusinessTest {
 
             String result = FormatUtil.formatDouble(num);
 
-            assertEquals("123.46", result);
+            assertEquals("123,46", result);
         }
         
         @Test
@@ -92,7 +90,7 @@ class SearchPriceBusinessTest {
             assertEquals("2020-06-14-00.00.00", response.getDateStart());
             assertEquals("2020-12-31-23.59.59", response.getDateEnd());
             assertEquals("1", response.getRate());
-            assertEquals("35.50 EUR", response.getPrice());
+            assertEquals("35,50 EUR", response.getPrice());
         }
 
         @Test
@@ -116,7 +114,7 @@ class SearchPriceBusinessTest {
             assertEquals("2020-06-14-15.00.00", response.getDateStart());
             assertEquals("2020-06-14-18.30.00", response.getDateEnd());
             assertEquals("2", response.getRate());
-            assertEquals("25.45 EUR", response.getPrice());
+            assertEquals("25,45 EUR", response.getPrice());
         }
 
         @Test
@@ -140,7 +138,7 @@ class SearchPriceBusinessTest {
             assertEquals("2020-06-14-00.00.00", response.getDateStart());
             assertEquals("2020-12-31-23.59.59", response.getDateEnd());
             assertEquals("1", response.getRate());
-            assertEquals("35.50 EUR", response.getPrice());
+            assertEquals("35,50 EUR", response.getPrice());
         }
 
         @Test
@@ -164,7 +162,7 @@ class SearchPriceBusinessTest {
             assertEquals("2020-06-15-00.00.00", response.getDateStart());
             assertEquals("2020-06-15-11.00.00", response.getDateEnd());
             assertEquals("3", response.getRate());
-            assertEquals("30.50 EUR", response.getPrice());
+            assertEquals("30,50 EUR", response.getPrice());
         }
         
         @Test
@@ -188,30 +186,30 @@ class SearchPriceBusinessTest {
             assertEquals("2020-06-15-16.00.00", response.getDateStart());
             assertEquals("2020-12-31-23.59.59", response.getDateEnd());
             assertEquals("4", response.getRate());
-            assertEquals("38.95 EUR", response.getPrice());
+            assertEquals("38,95 EUR", response.getPrice());
         }
 
         private List<Price> getPrice1() {
             return List.of(Price.builder().brandID("1").dateStart(FormatUtil.dateParse("2020-06-14-00.00.00"))
-                    .dateEnd(FormatUtil.dateParse("2020-12-31-23.59.59")).priceList("1").priority(0).productID("35455")
+                    .dateEnd(FormatUtil.dateParse("2020-12-31-23.59.59")).priceList(1).priority(0).productID("35455")
                     .amount(new Amount(Double.valueOf(35.50))).currency(Currency.valueOf("EUR")).build());
         }
 
         private List<Price> getPrice2() {
             return List.of(Price.builder().brandID("1").dateStart(FormatUtil.dateParse("2020-06-14-15.00.00"))
-                    .dateEnd(FormatUtil.dateParse("2020-06-14-18.30.00")).priceList("2").priority(1).productID("35455")
+                    .dateEnd(FormatUtil.dateParse("2020-06-14-18.30.00")).priceList(2).priority(1).productID("35455")
                     .amount(new Amount(Double.valueOf(25.45))).currency(Currency.valueOf("EUR")).build());
         }
         
         private List<Price> getPrice4() {
             return List.of(Price.builder().brandID("1").dateStart(FormatUtil.dateParse("2020-06-15-00.00.00"))
-            .dateEnd(FormatUtil.dateParse("2020-06-15-11.00.00")).priceList("3").priority(1).productID("35455")
+            .dateEnd(FormatUtil.dateParse("2020-06-15-11.00.00")).priceList(3).priority(1).productID("35455")
             .amount(new Amount(Double.valueOf(30.50))).currency(Currency.valueOf("EUR")).build());
         }
         
         private List<Price> getPrice5() {
             return List.of(Price.builder().brandID("1").dateStart(FormatUtil.dateParse("2020-06-15-16.00.00"))
-            .dateEnd(FormatUtil.dateParse("2020-12-31-23.59.59")).priceList("4").priority(1).productID("35455")
+            .dateEnd(FormatUtil.dateParse("2020-12-31-23.59.59")).priceList(4).priority(1).productID("35455")
             .amount(new Amount(Double.valueOf(38.95))).currency(Currency.valueOf("EUR")).build());
         
         }

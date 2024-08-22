@@ -22,7 +22,7 @@ public class SearchPriceUseCase {
             .dateStart(FormatUtil.toFormat(price.getDateStart()))
             .dateEnd(FormatUtil.toFormat(price.getDateEnd()))
             .price(price.getFinalPrice())
-            .rate(price.getPriceList())
+            .rate(price.getPriceList().toString())
         .build();        
     }
 

@@ -1,7 +1,9 @@
 package es.kairosds.pricepractice.domain.util;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import es.kairosds.pricepractice.application.exceptions.DateTimeParseException;
 
@@ -23,7 +25,14 @@ public class FormatUtil {
         return date.format(dtf);
     }
 
+    private static final NumberFormat numberFormatter = NumberFormat.getNumberInstance(new Locale("es", "ES"));
+
+    static {
+        numberFormatter.setMinimumFractionDigits(2);
+        numberFormatter.setMaximumFractionDigits(2);
+    }
+
     public static String formatDouble(Double num) {
-        return String.format("%.2f", num);
+        return numberFormatter.format(num);
     }
 }

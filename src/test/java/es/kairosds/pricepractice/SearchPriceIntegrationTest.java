@@ -35,7 +35,7 @@ class SearchPriceIntegrationTest {
         assertEquals("2020-06-14-00.00.00", response.getDateStart());
         assertEquals("2020-12-31-23.59.59", response.getDateEnd());
         assertEquals("1", response.getRate());
-        assertEquals("35.50 EUR", response.getPrice());
+        assertEquals("35,50 EUR", response.getPrice());
     }
     
     @Test
@@ -53,7 +53,7 @@ class SearchPriceIntegrationTest {
         assertEquals("2020-06-14-15.00.00", response.getDateStart());
         assertEquals("2020-06-14-18.30.00", response.getDateEnd());
         assertEquals("2", response.getRate());
-        assertEquals("25.45 EUR", response.getPrice());
+        assertEquals("25,45 EUR", response.getPrice());
     } 
     @Test
     void shouldWorksThirdCase() {
@@ -70,7 +70,7 @@ class SearchPriceIntegrationTest {
         assertEquals("2020-06-14-00.00.00", response.getDateStart());
         assertEquals("2020-12-31-23.59.59", response.getDateEnd());
         assertEquals("1", response.getRate());
-        assertEquals("35.50 EUR", response.getPrice());
+        assertEquals("35,50 EUR", response.getPrice());
     }
     
     @Test
@@ -89,7 +89,7 @@ class SearchPriceIntegrationTest {
         assertEquals("2020-06-15-00.00.00", response.getDateStart());
         assertEquals("2020-06-15-11.00.00", response.getDateEnd());
         assertEquals("3", response.getRate());
-        assertEquals("30.50 EUR", response.getPrice());
+        assertEquals("30,50 EUR", response.getPrice());
     
     } 
 
@@ -109,7 +109,7 @@ class SearchPriceIntegrationTest {
         assertEquals("2020-06-15-16.00.00", response.getDateStart());
         assertEquals("2020-12-31-23.59.59", response.getDateEnd());
         assertEquals("4", response.getRate());
-        assertEquals("38.95 EUR", response.getPrice());
+        assertEquals("38,95 EUR", response.getPrice());
     }
     
     @Test

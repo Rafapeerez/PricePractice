@@ -14,7 +14,7 @@ public class Price {
     private final String brandID;
     private final LocalDateTime dateStart;
     private final LocalDateTime dateEnd;
-    private final String priceList;
+    private final Integer priceList;
     private final String productID;    
     private final Integer priority;
     private final Amount amount;

@@ -16,7 +16,7 @@ public class PriceMapper {
             .currency(Currency.valueOf(priceJPA.getCurrency()))
             .dateEnd(priceJPA.getEndDate())
             .dateStart(priceJPA.getStartDate())
-            .priceList(priceJPA.getPriceList())
+            .priceList(Integer.valueOf(priceJPA.getPriceList()))
             .productID(priceJPA.getProductId())
             .priority(priceJPA.getPriority())
         .build();
