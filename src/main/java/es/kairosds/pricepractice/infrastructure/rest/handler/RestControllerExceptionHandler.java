@@ -2,6 +2,7 @@ package es.kairosds.pricepractice.infrastructure.rest.handler;
 
 import es.kairosds.pricepractice.application.exceptions.BadRequestException;
 import es.kairosds.pricepractice.application.exceptions.GenericUnexpectedException;
+import es.kairosds.pricepractice.application.exceptions.MissingDataException;
 import es.kairosds.pricepractice.application.exceptions.PriceException;
 import es.kairosds.pricepractice.infrastructure.rest.dto.ErrorCodeDTO;
 import es.kairosds.pricepractice.infrastructure.rest.dto.ErrorDTO;
@@ -10,12 +11,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.stream.Collectors;
@@ -53,6 +57,27 @@ public class RestControllerExceptionHandler extends ResponseEntityExceptionHandl
         final WebRequest request
     ) {
         return badRequest().body(buildError(new BadRequestException(ex.getMessage()), ErrorCodeDTO.BAD_REQUEST));
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(
+        MissingServletRequestParameterException ex, HttpHeaders headers, 
+            HttpStatusCode status, WebRequest request) {
+
+        String errorMessage = "missing required parameter: " + ex.getParameterName();
+        ErrorDTO errorDTO = buildError(new MissingDataException(errorMessage), ErrorCodeDTO.BAD_REQUEST);
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorDTO> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        String name = ex.getName();
+        String type = ex.getRequiredType().getSimpleName();
+        Object value = ex.getValue();
+        String message = String.format("Parameter '%s' must be of type %s , but received: %s", name, type, value);
+
+        ErrorDTO errorDTO = buildError(new BadRequestException(message), ErrorCodeDTO.BAD_REQUEST);
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(PriceException.class)

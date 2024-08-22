@@ -44,14 +44,14 @@ Make a GET request to the following API endpoint:
 
 ### Parameters
 
-- date: The date in format yyyy-MM-dd-HH:mm:ss (required)
+- date: The date in format yyyy-MM-ddTHH:mm:ss (required)
 - productId: Product ID (required)
 - brandId: Brand ID (required)
 
 ### Request Example
 
 ```bash
-    curl -X GET "http://localhost:8080/price/search?date=2020-06-14-10.00.00&productId=35455&brandId=1"
+    curl -X GET "http://localhost:8080/price/search?date=2020-06-14T10:00:00&productId=35455&brandId=1"
 ```
 
 ### Response Example

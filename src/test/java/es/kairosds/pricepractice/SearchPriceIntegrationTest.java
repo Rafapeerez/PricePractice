@@ -23,7 +23,7 @@ class SearchPriceIntegrationTest {
     void shouldWorksFirstCase() {
 
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-14-10.00.00&productId=35455&brandId=1",SearchPriceResponse.class);
+                "/price/search?date=2020-06-14T10:00:00&productId=35455&brandId=1", SearchPriceResponse.class);
         
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
@@ -42,7 +42,7 @@ class SearchPriceIntegrationTest {
     void shouldWorksSecondCase() {
 
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-14-16.00.00&productId=35455&brandId=1", SearchPriceResponse.class);
+                "/price/search?date=2020-06-14T16:00:00&productId=35455&brandId=1", SearchPriceResponse.class);
 
         assertTrue(res.getStatusCode().is2xxSuccessful());
 
@@ -58,7 +58,7 @@ class SearchPriceIntegrationTest {
     @Test
     void shouldWorksThirdCase() {
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-14-21.00.00&productId=35455&brandId=1", SearchPriceResponse.class);
+                "/price/search?date=2020-06-14T21:00:00&productId=35455&brandId=1", SearchPriceResponse.class);
 
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
@@ -77,7 +77,7 @@ class SearchPriceIntegrationTest {
     void shouldWorksFourthCase() {
     
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-15-10.00.00&productId=35455&brandId=1", SearchPriceResponse.class);
+                "/price/search?date=2020-06-15T10:00:00&productId=35455&brandId=1", SearchPriceResponse.class);
 
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
@@ -97,7 +97,7 @@ class SearchPriceIntegrationTest {
     void shouldWorksFifthCase() {
 
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-16-21.00.00&productId=35455&brandId=1", SearchPriceResponse.class);
+                "/price/search?date=2020-06-16T21:00:00&productId=35455&brandId=1", SearchPriceResponse.class);
 
         assertNotNull(res.getBody(), "The answer must not be null");
         assertTrue(res.getStatusCode().is2xxSuccessful());
@@ -115,7 +115,7 @@ class SearchPriceIntegrationTest {
     @Test
     void shouldAlertNotFoundPrice() {
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-16-21.00.00&productId=1&brandId=4", SearchPriceResponse.class);
+                "/price/search?date=2020-06-16T21:00:00&productId=1&brandId=4", SearchPriceResponse.class);
 
         assertTrue(res.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(404)));
     }
@@ -123,7 +123,7 @@ class SearchPriceIntegrationTest {
     @Test
     void shouldAlertMissingInfo() {
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-16-21.00.00&productId=35455&brandId=", SearchPriceResponse.class);
+                "/price/search?date=2020-06-16T21:00:00&productId=35455&brandId=", SearchPriceResponse.class);
 
         assertTrue(res.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400)));
     }
@@ -131,7 +131,7 @@ class SearchPriceIntegrationTest {
     @Test
     void shouldAlertBadRequest() {
         ResponseEntity<SearchPriceResponse> res = restTemplate.getForEntity(
-                "/price/search?date=2020-06-16-21.00.00&brandId=1", SearchPriceResponse.class);
+                "/price/search?date=2020-06-16T21:00:00&brandId=1", SearchPriceResponse.class);
         
         assertTrue(res.getStatusCode().isSameCodeAs(HttpStatusCode.valueOf(400)));
     }
